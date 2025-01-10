@@ -50,7 +50,7 @@ await connect(process.env.MONGODB_URI)
   .catch((err) => console.error('MongoDB connection error:', err));
 
 // Initialize users
-await User.deleteMany();
+// await User.deleteMany();
 
 const users = [
   {
@@ -76,10 +76,10 @@ const users = [
   },
 ];
 
-for (const user of users) {
-  const newUser = new User(user);
-  await newUser.save();
-}
+// for (const user of users) {
+//   const newUser = new User(user);
+//   await newUser.save();
+// }
 
 // Routes
 app.use('/api/auth', authRoutes);
