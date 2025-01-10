@@ -76,10 +76,10 @@ const users = [
   },
 ];
 
-// for (const user of users) {
-//   const newUser = new User(user);
-//   await newUser.save();
-// }
+for (const user of users) {
+  const newUser = new User(user);
+  await newUser.save();
+}
 
 // Routes
 app.use('/api/auth', authRoutes);
