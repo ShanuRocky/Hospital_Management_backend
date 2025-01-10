@@ -15,9 +15,10 @@ config();
 
 const app = express();
 const httpServer = createServer(app);
+const url = process.env.URL || "http://localhost:3000";
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: url,
     methods: ["GET", "POST"]
   }
 });
@@ -75,10 +76,10 @@ const users = [
   },
 ];
 
-for (const user of users) {
-  const newUser = new User(user);
-  await newUser.save();
-}
+// for (const user of users) {
+//   const newUser = new User(user);
+//   await newUser.save();
+// }
 
 // Routes
 app.use('/api/auth', authRoutes);
