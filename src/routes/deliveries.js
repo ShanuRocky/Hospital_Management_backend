@@ -3,7 +3,6 @@ import MealDelivery from '../models/MealDelivery.js';
 
 const router = express.Router();
 
-// Get all deliveries
 router.get('/:role/:id', async (req, res) => {
   try {
     const role = req.params.role;
@@ -11,7 +10,6 @@ router.get('/:role/:id', async (req, res) => {
     console.log(role , _id, "hhhhh")
     let query = {};
 
-    // Filter deliveries based on user role
     if (role === 'pantry_staff') {
       query.assigned_to_pantry = _id;
     } else if (role === 'delivery') {
@@ -36,7 +34,6 @@ router.get('/:role/:id', async (req, res) => {
   }
 });
 
-// Create delivery with pantry staff assignment
 router.post('/', async (req, res) => {
   try {
     const { diet_chart_id, assigned_to_pantry } = req.body;
@@ -48,7 +45,6 @@ router.post('/', async (req, res) => {
 
     await delivery.save();
 
-    // Notify assigned pantry staff
     const io = req.app.get('io');
     io.to(assigned_to_pantry.toString()).emit('new_preparation_task', {
       delivery: await delivery.populate([
@@ -69,7 +65,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Update preparation status
 router.patch('/:id/preparation_status', async (req, res) => {
   try {
     const { preparation_status } = req.body;
@@ -99,7 +94,6 @@ router.patch('/:id/preparation_status', async (req, res) => {
   }
 });
 
-// Assign delivery staff
 router.patch('/:id/assign_delivery', async (req, res) => {
   try {
     const { assigned_to_delivery } = req.body;
@@ -117,7 +111,6 @@ router.patch('/:id/assign_delivery', async (req, res) => {
     delivery.updated_at = new Date();
     await delivery.save();
 
-    // Notify assigned delivery staff
     const io = req.app.get('io');
     io.to(assigned_to_delivery.toString()).emit('new_delivery_task', {
       delivery: await delivery.populate([
@@ -138,7 +131,6 @@ router.patch('/:id/assign_delivery', async (req, res) => {
   }
 });
 
-// Update delivery status
 router.patch('/:id/delivery_status', async (req, res) => {
   try {
     const { delivery_status } = req.body;

@@ -3,7 +3,6 @@ import Patient from '../models/Patient.js';
 
 const router = express.Router();
 
-// Create a new patient
 router.post('/', async (req, res) => {
   try {
     const patient = new Patient(req.body);
@@ -14,7 +13,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Get all patients
 router.get('/', async (req, res) => {
   try {
     const patients = await Patient.find();
@@ -24,7 +22,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get a single patient by ID
 router.get('/:id', async (req, res) => {
   try {
     const patient = await Patient.findById(req.params.id);
@@ -37,7 +34,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Update a patient
 router.put('/:id', async (req, res) => {
   try {
     const patient = await Patient.findByIdAndUpdate(req.params.id, req.body, {
@@ -53,7 +49,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Delete a patient
 router.delete('/:id', async (req, res) => {
   try {
     const patient = await Patient.findByIdAndDelete(req.params.id);

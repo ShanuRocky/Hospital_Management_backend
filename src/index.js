@@ -23,33 +23,28 @@ const io = new Server(httpServer, {
   }
 });
 
-// Socket.IO connection handling
 io.on('connection', (socket) => {
-  // console.log('Client connected:', socket.id);
+  console.log('Client connected:', socket.id);
 
   socket.on('join_room', (userId) => {
     socket.join(userId);
-    // console.log(`User ${userId} joined their room`);
+    console.log(`User ${userId} joined their room`);
   });
 
   socket.on('disconnect', () => {
-    // console.log('Client disconnected:', socket.id);
+    console.log('Client disconnected:', socket.id);
   });
 });
 
-// Make io accessible to routes
 app.set('io', io);
 
-// Middleware
 app.use(cors());
 app.use(json());
 
-// Connect to MongoDB
 await connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
-// Initialize users
 // await User.deleteMany();
 
 const users = [
@@ -81,7 +76,6 @@ const users = [
 //   await newUser.save();
 // }
 
-// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/patients', patientRoutes);
 app.use('/api/diet-charts', dietChartRoutes);
