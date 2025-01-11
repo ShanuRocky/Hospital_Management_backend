@@ -16,6 +16,7 @@ config();
 const app = express();
 const httpServer = createServer(app);
 const url = process.env.NEXT_PUBLIC_API_URL;
+console.log("CORS Origin URL:", url)
 const io = new Server(httpServer, {
   cors: {
     origin: url,
