@@ -15,7 +15,7 @@ config();
 
 const app = express();
 const httpServer = createServer(app);
-const url = process.env.URL || "http://localhost:3000";
+const url = process.env.NEXT_PUBLIC_API_URL;
 const io = new Server(httpServer, {
   cors: {
     origin: url,
@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
   });
 });
 
-app.set('io', io);
+app.set('io' , io);
 
 app.use(cors());
 app.use(json());

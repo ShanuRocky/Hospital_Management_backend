@@ -7,7 +7,6 @@ router.get('/:role/:id', async (req, res) => {
   try {
     const role = req.params.role;
     const _id = req.params.id; 
-    console.log(role , _id, "hhhhh")
     let query = {};
 
     if (role === 'pantry_staff') {

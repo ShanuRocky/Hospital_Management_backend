@@ -7,10 +7,8 @@ router.post('/', async (req, res) => {
   try {
     const dietChart = new DietChart(req.body);
     const data = await dietChart.save();
-    console.log(req.body);
     res.status(201).json(data);
   } catch (error) {
-    console.log(req.body);
     res.status(400).json({ error: error.message });
   }
 });
@@ -20,7 +18,6 @@ router.get('/', async (req, res) => {
     const dietCharts = await DietChart.find()
     .populate('patient_id')       // Populate patient details
     .populate('assigned_pantry') ;// Populate pantry details
-    console.log(dietCharts)
     res.json(dietCharts);
   } catch (error) {
     res.status(500).json({ error: error.message });
